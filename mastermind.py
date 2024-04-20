@@ -1,3 +1,4 @@
 class Mastermind:
-    def __init__(self):
-        print('Hello, world!')
+    def __init__(self, combination: str):
+        self.combination = combination
+    
