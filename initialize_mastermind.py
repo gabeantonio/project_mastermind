@@ -1,7 +1,9 @@
+from mastermind import Mastermind
+
 class Game:
     def main():
-        print('Hello World!')
+        mastermind = Mastermind('1234')
+        print(mastermind)
     
     if __name__ == '__main__':
         main()
-        
