@@ -7,5 +7,9 @@ class Mastermind:
         self.combination = combination
         self.guesses = []
 
-
     # Write winning logic:
+    def correct_guess(self):
+        if self.guesses[-1] == self.combination:
+            return True
+        else:
+            return False
