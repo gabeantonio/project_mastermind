@@ -13,3 +13,7 @@ class Mastermind:
             return True
         else:
             return False
+
+    # Write logic in the event that a user attempts a combination:
+    def add_guess(self, guess: str):
+        self.guesses.append(guess)
