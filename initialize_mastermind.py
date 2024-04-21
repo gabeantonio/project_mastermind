@@ -7,7 +7,7 @@ import math
 def main():
     combination = generate_combination()
     mastermind = Mastermind(combination)
-    print(combination, '<------ COMBINATION')
+    # print(combination, '<------ COMBINATION')
     player_score = 0
     start = time.time()
     while mastermind.continue_game():
