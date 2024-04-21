@@ -6,6 +6,7 @@ def main():
     combination = generate_combination()
     mastermind = Mastermind(combination)
     print(combination, '<------ COMBINATION')
+    player_score = 0
     while mastermind.continue_game():
         user_guess = input('Type your guess here: ')
         if not user_guess.isnumeric():
@@ -18,14 +19,18 @@ def main():
         mastermind.add_guess(user_guess)
         guesses = mastermind.user_guesses()
         check = mastermind.check(user_guess)
+
         if all_incorrect(check):
             print(Fore.RED + f'Sorry, all are incorrect. \n' + Fore.RESET)
         else:
-            feedback(guesses, check)
+            correct_numbers, correct_positions = check[0], check[1]
+            player_score += (correct_positions * 4) + correct_numbers
+            feedback(guesses, check, player_score)
 
     # Add logic that will check to see if the most recent guess is correct or not:
     if mastermind.correct_guess:
-        print(Fore.GREEN + 'You won! \n' + Fore.RESET)
+        player_score += 200 - ((10 - len(guesses)) * 5)
+        print(Fore.GREEN + f'You won! Your final score: {player_score} \n' + Fore.RESET)
     else:
         print(Fore.RED + 'You lost! \n' + Fore.RESET )
 
@@ -42,9 +47,8 @@ def all_incorrect(check):
     if check[0] == 0:
         return True
     
-
-def feedback(guesses, check):
-    print(f'You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' )  
+def feedback(guesses, check, player_score):
+    print(f'Your score: {player_score}. You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' )  
 
 
 if __name__ == '__main__':
