@@ -1,8 +1,10 @@
 from mastermind import Mastermind
-
+import requests
 
 def main():
-    mastermind = Mastermind('1234')
+    combination = generate_combination()
+    mastermind = Mastermind(combination)
+    print(combination, '<------ COMBINATION')
     while mastermind.continue_game:
         user_guess = input('Type your guess here: ')
         mastermind.add_guess(user_guess)
@@ -14,7 +16,15 @@ def main():
             break
         else:
             print('Try again!')
-    
+
+def generate_combination():
+    api_url = f"https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
+    response = requests.get(api_url)
+    if response.status_code == 200:
+        combination = f'{response.text}'.replace('\n', '')
+        return combination
+    else:
+        print(f'Failed to get a random combination. Status code: {response.status_code}')    
 
 if __name__ == '__main__':
     main()
