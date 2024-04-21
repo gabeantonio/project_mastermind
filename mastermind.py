@@ -40,7 +40,7 @@ class Mastermind:
             if number in self.combination:
                 in_combination.append(number)
             if number == self.combination[i]:
-                correct_positions += 1
+                in_position += 1
         correct_numbers = len(set(in_combination))
         return [correct_numbers, in_position, len(in_combination)]
 

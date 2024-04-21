@@ -10,6 +10,10 @@ def main():
         mastermind.add_guess(user_guess)
         guesses = mastermind.user_guesses()
         print('GUESSES --->', guesses)
+
+        check = mastermind.check(user_guess)
+        print('Correct numbers -->', check[0], 'Correct positions -->', check[1])
+
         # Add logic that will check to see if the most recent guess is correct or not:
         if mastermind.correct_guess():
             print('You won!')
