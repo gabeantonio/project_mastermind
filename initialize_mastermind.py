@@ -5,7 +5,7 @@ def main():
     combination = generate_combination()
     mastermind = Mastermind(combination)
     print(combination, '<------ COMBINATION')
-    while mastermind.continue_game:
+    while mastermind.continue_game():
         user_guess = input('Type your guess here: ')
         mastermind.add_guess(user_guess)
         guesses = mastermind.user_guesses()
@@ -14,12 +14,11 @@ def main():
         check = mastermind.check(user_guess)
         print('Correct numbers -->', check[0], 'Correct positions -->', check[1])
 
-        # Add logic that will check to see if the most recent guess is correct or not:
-        if mastermind.correct_guess():
-            print('You won!')
-            break
-        else:
-            print('Try again!')
+    # Add logic that will check to see if the most recent guess is correct or not:
+    if mastermind.correct_guess:
+        print('You won!')
+    else:
+        print('You lost!')
 
 def generate_combination():
     api_url = f"https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
