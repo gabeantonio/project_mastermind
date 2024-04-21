@@ -24,3 +24,8 @@ class Mastermind:
             return True
         else:
             return False
+        
+    # Write logic for a user to be able to view their past guesses:
+    def user_guesses(self):
+        return self.guesses
+    
