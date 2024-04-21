@@ -1,5 +1,6 @@
 from mastermind import Mastermind
 import requests
+from colorama import Fore
 
 def main():
     combination = generate_combination()
@@ -7,10 +8,19 @@ def main():
     print(combination, '<------ COMBINATION')
     while mastermind.continue_game():
         user_guess = input('Type your guess here: ')
+        if not user_guess.isnumeric():
+            print(Fore.RED + f'Please enter numbers only. \n' + Fore.RESET)
+            continue
+        if len(user_guess) != len(combination):
+            print(Fore.RED + f'Input is either too short or too long. Please make sure your input is {len(combination)} digits long. \n' + Fore.RESET)
+            continue
+
+
         mastermind.add_guess(user_guess)
         guesses = mastermind.user_guesses()
         check = mastermind.check(user_guess)
         feedback(guesses, check)
+    
 
         
 
@@ -30,7 +40,8 @@ def generate_combination():
         print(f'Failed to get a random combination. Status code: {response.status_code}')
 
 def feedback(guesses, check):
-    print(f'You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' )    
+    print(f'You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' )  
+
 
 if __name__ == '__main__':
     main()
