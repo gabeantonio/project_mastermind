@@ -43,7 +43,7 @@ class Mastermind:
             if number == self.combination[i]:
                 in_position += 1
         correct_numbers = len(set(in_combination))
-        return [correct_numbers, in_position, len(in_combination)]
+        return [correct_numbers, in_position]
 
     
 
