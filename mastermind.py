@@ -1,7 +1,6 @@
 class Mastermind:
 
     TOTAL_TRIES = 10
-    COMBINATION_LENGTH = 4
 
     def __init__(self, combination: str):
         self.combination = combination
@@ -35,7 +34,16 @@ class Mastermind:
     
     # Write logic that checks if the guess is correct, partially correct, or incorrect:
     def check(self, guess: str):
-        pass
+        in_combination, in_position = [], 0
+        for i in range(len(self.combination)):
+            number = guess[i]
+            if number in self.combination:
+                in_combination.append(number)
+            if number == self.combination[i]:
+                correct_positions += 1
+        correct_numbers = len(set(in_combination))
+        return [correct_numbers, in_position, len(in_combination)]
+
     
 
     
