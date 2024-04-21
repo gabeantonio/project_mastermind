@@ -9,11 +9,9 @@ def main():
         user_guess = input('Type your guess here: ')
         mastermind.add_guess(user_guess)
         guesses = mastermind.user_guesses()
-        print('GUESSES --->', guesses)
-
         check = mastermind.check(user_guess)
-        print('Correct numbers -->', check[0], 'Correct positions -->', check[1])
-        print(f'You have {10 - len(guesses)} attempts remaining!')
+        feedback(guesses, check)
+
         
 
     # Add logic that will check to see if the most recent guess is correct or not:
@@ -29,7 +27,10 @@ def generate_combination():
         combination = f'{response.text}'.replace('\n', '')
         return combination
     else:
-        print(f'Failed to get a random combination. Status code: {response.status_code}')    
+        print(f'Failed to get a random combination. Status code: {response.status_code}')
+
+def feedback(guesses, check):
+    print(f'You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' )    
 
 if __name__ == '__main__':
     main()
