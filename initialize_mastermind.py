@@ -11,12 +11,12 @@ def main():
     player_score = 0
     start = time.time()
     while mastermind.continue_game():
-        user_guess = input('Type your guess here: ')
+        user_guess = input('\nType your guess here: ')
         if not user_guess.isnumeric():
-            print(Fore.RED + f'Please enter numbers only. \n' + Fore.RESET)
+            print(Fore.RED + f'\nPlease enter numbers only. \n' + Fore.RESET)
             continue
         if len(user_guess) != len(combination):
-            print(Fore.RED + f'Input is either too short or too long. Please make sure your input is {len(combination)} digits long. \n' + Fore.RESET)
+            print(Fore.RED + f'\nInput is either too short or too long. Please make sure your input is {len(combination)} digits long. \n' + Fore.RESET)
             continue
 
         mastermind.add_guess(user_guess)
@@ -53,7 +53,7 @@ def all_incorrect(check):
         return True
     
 def feedback(guesses, check):
-    print(f'You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' )  
+    print(Fore.GREEN + f'You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' + Fore.RESET)  
 
 
 if __name__ == '__main__':
