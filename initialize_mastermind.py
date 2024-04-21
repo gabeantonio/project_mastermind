@@ -1,12 +1,15 @@
 from mastermind import Mastermind
 import requests
 from colorama import Fore
+import time
+import math
 
 def main():
     combination = generate_combination()
     mastermind = Mastermind(combination)
     print(combination, '<------ COMBINATION')
     player_score = 0
+    start = time.time()
     while mastermind.continue_game():
         user_guess = input('Type your guess here: ')
         if not user_guess.isnumeric():
@@ -23,16 +26,18 @@ def main():
         if all_incorrect(check):
             print(Fore.RED + f'Sorry, all are incorrect. \n' + Fore.RESET)
         else:
-            correct_numbers, correct_positions = check[0], check[1]
-            player_score += (correct_positions * 4) + correct_numbers
-            feedback(guesses, check, player_score)
+            feedback(guesses, check)
 
     # Add logic that will check to see if the most recent guess is correct or not:
     if mastermind.correct_guess:
-        player_score += 200 - ((10 - len(guesses)) * 5)
+        end = time.time()
+        duration = end - start
+        player_score += math.floor((900 - duration) * 5)
+        if player_score < 0:
+            player_score = 0
         print(Fore.GREEN + f'You won! Your final score: {player_score} \n' + Fore.RESET)
     else:
-        print(Fore.RED + 'You lost! \n' + Fore.RESET )
+        print(Fore.RED + f'You lost! Your final score: {player_score} \n' + Fore.RESET )
 
 def generate_combination():
     api_url = f"https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
@@ -47,8 +52,8 @@ def all_incorrect(check):
     if check[0] == 0:
         return True
     
-def feedback(guesses, check, player_score):
-    print(f'Your score: {player_score}. You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' )  
+def feedback(guesses, check):
+    print(f'You guessed {check[0]} correct numbers in {check[1]} correct positions. You have {10 - len(guesses)} attempts remaining. Your previous guesses: {guesses} \n' )  
 
 
 if __name__ == '__main__':
