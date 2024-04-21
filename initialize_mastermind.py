@@ -9,18 +9,12 @@ def main():
         guesses = mastermind.user_guesses()
         print('GUESSES --->', guesses)
         # Add logic that will check to see if the most recent guess is correct or not:
-        if check(user_guess,  mastermind.combination):
+        if mastermind.correct_guess():
             print('You won!')
             break
         else:
             print('Try again!')
     
 
-def check(user_guess, combination):
-    if user_guess == combination:
-        return True
-    else:
-        return False
-    
 if __name__ == '__main__':
     main()
