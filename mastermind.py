@@ -25,7 +25,13 @@ class Mastermind:
         else:
             return False
         
+    # Write logic that adds a user's guesses to the self.guesses array:
+    def add_guess(self, guess: str):
+        self.guesses.append(guess)
+        
     # Write logic for a user to be able to view their past guesses:
     def user_guesses(self):
         return self.guesses
+    
+
     
