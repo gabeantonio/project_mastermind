@@ -33,5 +33,9 @@ class Mastermind:
     def user_guesses(self):
         return self.guesses
     
+    # Write logic that checks if the guess is correct, partially correct, or incorrect:
+    def check(self, guess: str):
+        pass
+    
 
     
