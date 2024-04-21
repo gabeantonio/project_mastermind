@@ -22,3 +22,6 @@ PROCESS
 TECHNOLOGIES USED:
 1. Python
 2. Python requests.2.31.0
+3. Colorama (for game interface)
+4. Python Time Module (for timer scoring functionality)
+5. Python Math Module (for timer scoring functionality)
