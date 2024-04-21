@@ -16,6 +16,7 @@ PROCESS
 12. Then, based on the result of the guess, I want to display a message on the terminal.
 13. I then want to add colors to the messages based on the contents. 
 14. Now that MVP is done, I want to implement a new feature: Giving the player a score that we can keep track of and display at the end of the game.
+15. The score will be based on how long the user takes to guess the correct combination, if at all. The faster the user guesses correctly, the higher their score will be. If the user fails to guess the combination entirely, they will gain no points. 
 
 TECHNOLOGIES USED:
 1. Python
