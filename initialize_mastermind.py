@@ -23,8 +23,6 @@ def main():
         else:
             feedback(guesses, check)
 
-        
-
     # Add logic that will check to see if the most recent guess is correct or not:
     if mastermind.correct_guess:
         print(Fore.GREEN + 'You won! \n' + Fore.RESET)
