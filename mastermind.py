@@ -77,7 +77,7 @@ class Mastermind:
     def display_feedback(self, feedback):
         return Fore.GREEN + f'You guessed {feedback[0]} correct numbers in {feedback[1]} correct positions. ' \
                             f'You have {self.TOTAL_TRIES - len(self.guesses)} attempts remaining. ' \
-                            f'Your previous guesses: {self.guesses}\n' + Fore.RESET  
+                            f'Your previous guesses: \n {self.guesses}\n' + Fore.RESET  
     
     # Write a method that checks if a user's guess is entirely incorrect:
     def all_incorrect(self, feedback):
