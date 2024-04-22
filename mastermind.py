@@ -2,6 +2,7 @@ import requests
 from colorama import Fore
 import time
 import math
+import random
 
 class Mastermind:
 
@@ -11,7 +12,7 @@ class Mastermind:
         "numbers_only": "Please only enter numbers.",
         "wrong_length": "Input is either too short or too long. Please make sure your input is {} digits long.",
         "difficulty": "Please input either Easy or Hard.",
-        "all_incorrect": "Sorry, all the numbers are incorrect.",
+        "entirely_incorrect": "Sorry, all the numbers are incorrect.",
         "win": "You won! Your final score: {}",
         "lose": "You failed to guess the combination! Your final score: {}"
     }
@@ -28,8 +29,9 @@ class Mastermind:
             combination = f'{response.text}'.replace('\n', '')
             return combination
         else:
-            print(f'Failed to get a random combination. Status code: {response.status_code}')
-            exit()
+            print(f'Failed to get a combination from API. Status code: {response.status_code}. Generating random number instead.')
+            return ''.join(str(random.randint(0, 7)) for _ in range(4))
+            
 
     # Write a method that checks if the guess is correct, partially correct, or incorrect:
     def check(self, guess: str):
@@ -66,7 +68,7 @@ class Mastermind:
             if not user_guess.isnumeric():
                 print(Fore.RED + f'\n{self.MESSAGES["numbers_only"]}\n' + Fore.RESET) 
             elif len(user_guess) != len(self.combination):
-                print(Fore.RED + f'\n{self.MESSAGES["wrong_length"].format(len(self.combination))}\n' + Fore.RESET)  # Used message constant
+                print(Fore.RED + f'\n{self.MESSAGES["wrong_length"].format(len(self.combination))}\n' + Fore.RESET)
             else:
                 return user_guess
 
@@ -107,7 +109,7 @@ class Mastermind:
             self.add_guess(user_guess)
             feedback = self.check(user_guess)
             if self.all_incorrect(feedback):
-                print(Fore.RED + f'{self.MESSAGES["all_incorrect"]}\n' + Fore.RESET)
+                print(Fore.RED + f'{self.MESSAGES["entirely_incorrect"]}\n' + Fore.RESET)
             else:
                 print(self.display_feedback(feedback))
 
