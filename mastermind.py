@@ -7,13 +7,22 @@ class Mastermind:
 
     TOTAL_TRIES = 10
 
+    MESSAGES = {
+        "numbers_only": "Please only enter numbers.",
+        "wrong_length": "Input is either too short or too long. Please make sure your input is {} digits long.",
+        "difficulty": "Please input either Easy or Hard.",
+        "all_incorrect": "Sorry, all the numbers are incorrect.",
+        "win": "You won! Your final score: {}",
+        "lose": "You failed to guess the combination! Your final score: {}"
+    }
+
     def __init__(self):
-        self.combination = self.generate_combination()
+        self.combination = self.generate_combination(self.difficulty())
         self.guesses = []
 
     # Write a method that fetches the random number combination from the API:
-    def generate_combination(self):
-        api_url = f"https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
+    def generate_combination(self, difficulty_level):
+        api_url = f"https://www.random.org/integers/?num={difficulty_level}&min=0&max=7&col=1&base=10&format=plain&rnd=new"
         response = requests.get(api_url)
         if response.status_code == 200:
             combination = f'{response.text}'.replace('\n', '')
@@ -73,11 +82,24 @@ class Mastermind:
     # Write a method that checks if a user's guess is entirely incorrect:
     def all_incorrect(self, feedback):
         return feedback[0] == 0
+    
+    def difficulty(self):
+        while True:
+            desired_difficulty = input('\nDo you want to play on Easy or Hard mode? ')
+            if desired_difficulty != 'Easy' and desired_difficulty != 'Hard':
+                print(Fore.RED + f'\n{self.MESSAGES["difficulty"]}\n' + Fore.RESET) 
+            else:
+                break
+        if desired_difficulty == "Easy":
+            return 4
+        if desired_difficulty == "Hard":
+            return 5
+
 
     # Write a method that allows the user to play the game:
     def play(self):
-        print("Welcome to Mastermind!")
-        print("Try to guess the secret code consisting of 4 numbers between 0 and 7.")
+        print("\nWelcome to Mastermind!")
+        print(f"Try to guess the secret code consisting of {len(self.combination)} numbers between 0 and 7.")
         print("You have 10 attempts to guess correctly. Good luck!\n")
         print(self.combination, '<------ COMBINATION')
         player_score = 0
@@ -103,13 +125,6 @@ class Mastermind:
         else:
             print(Fore.RED + f'{self.MESSAGES["lose"].format(player_score)}\n' + Fore.RESET ) 
 
-    MESSAGES = {
-        "numbers_only": "Please only enter numbers.",
-        "wrong_length": "Input is either too short or too long. Please make sure your input is {} digits long.",
-        "all_incorrect": "Sorry, all the numbers are incorrect.",
-        "win": "You won! Your final score: {}",
-        "lose": "You failed to guess the combination! Your final score: {}"
-    }
 
 if __name__ == "__main__":
     game = Mastermind()
