@@ -13,6 +13,9 @@ class Mastermind:
         "wrong_length": "Input is either too short or too long. Please make sure your input is {} digits long.",
         "difficulty": "Please input either Easy or Hard.",
         "entirely_incorrect": "Sorry, all the numbers are incorrect.",
+        "hint_error": "Please input either yes or no.",
+        "hint_needed": "One of the numbers is {}",
+        "no_hint": "Okay, good luck!",
         "win": "You won! Your final score: {}",
         "lose": "You failed to guess the combination! Your final score: {}"
     }
@@ -97,6 +100,18 @@ class Mastermind:
         if desired_difficulty == "Hard":
             return self.HARD_MODE
 
+    def hint(self):
+        while True:
+            hint_needed = input("Do you need a hint? ")
+            if hint_needed != 'yes' and hint_needed != 'no':
+                print(Fore.RED + f'\n{self.MESSAGES["hint_error"]}\n' + Fore.RESET) 
+            else:
+                break
+        if hint_needed == "yes":
+            random_index = random.randint(0, len(self.combination) - 1)
+            return Fore.CYAN + f'\n{self.MESSAGES["hint_needed"].format(self.combination[random_index])}\n' + Fore.RESET
+        if hint_needed == "no":
+            return Fore.CYAN + f'\n{self.MESSAGES["no_hint"]}\n' + Fore.RESET
 
     # Write a method that allows the user to play the game:
     def play(self):
@@ -113,6 +128,7 @@ class Mastermind:
             feedback = self.check(user_guess)
             if self.all_incorrect(feedback):
                 print(Fore.RED + f'{self.MESSAGES["entirely_incorrect"]}\n' + Fore.RESET)
+                print(self.hint())
             else:
                 print(self.display_feedback(feedback))
 
