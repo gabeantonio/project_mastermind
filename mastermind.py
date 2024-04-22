@@ -53,10 +53,7 @@ class Mastermind:
         
     # Write a method that checks if a user can still make guesses:
     def continue_game(self):
-        if self.TOTAL_TRIES - len(self.guesses) > 0 and self.correct_guess == False:
-            return True
-        else: 
-            return False
+        return self.TOTAL_TRIES - len(self.guesses) > 0 and not self.correct_guess
         
     # Write a method that adds a user's guesses to the self.guesses array:
     def add_guess(self, guess: str):
