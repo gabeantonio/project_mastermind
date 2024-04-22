@@ -17,6 +17,9 @@ class Mastermind:
         "lose": "You failed to guess the combination! Your final score: {}"
     }
 
+    EASY_MODE = 4
+    HARD_MODE = 5
+
     def __init__(self):
         self.combination = self.generate_combination(self.difficulty())
         self.guesses = []
@@ -90,9 +93,9 @@ class Mastermind:
             else:
                 break
         if desired_difficulty == "Easy":
-            return 4
+            return self.EASY_MODE
         if desired_difficulty == "Hard":
-            return 5
+            return self.HARD_MODE
 
 
     # Write a method that allows the user to play the game:
