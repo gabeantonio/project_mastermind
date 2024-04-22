@@ -18,7 +18,8 @@ PROCESS
 14. Now that MVP is done, I want to implement a new feature: Giving the player a score that we can keep track of and display at the end of the game.
 15. The score will be based on how long the user takes to guess the correct combination, if at all. The faster the user guesses correctly, the higher their score will be. If the user fails to guess the combination entirely, they will gain no points. 
 16. Next, I want to add difficulty levels.
-17. I refactored the code to fit into just one script: the mastermind.py script. I was able to do this by moving some of the methods from initialize_mastermind.py into the mastermind class. 
+17. I refactored the code to fit into just one script: the mastermind.py script. I was able to do this by moving some of the methods from initialize_mastermind.py into the mastermind class.
+18. I then added a hint method to the mastermind class.
 
 TECHNOLOGIES USED:
 1. Python
