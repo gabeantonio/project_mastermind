@@ -7,7 +7,7 @@
 2. Clone this repository - Open your terminal and run the following command to clone this Mastermind repository:
 
 ```
-$ git clone https://github.com/gabeantonio/mastermind.git
+$ git clone https://github.com/gabeantonio/project_mastermind.git
 ```
 
 3. Navigate to the project's directory - Move to the Mastermind project directory using the below command:
