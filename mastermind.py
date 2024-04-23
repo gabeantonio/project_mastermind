@@ -7,7 +7,8 @@ import random
 class Mastermind:
 
     TOTAL_TRIES = 10
-
+    EASY_MODE = 4
+    HARD_MODE = 5
     MESSAGES = {
         "numbers_only": "Please only enter numbers.",
         "wrong_length": "Input is either too short or too long. Please make sure your input is {} digits long.",
@@ -19,9 +20,6 @@ class Mastermind:
         "win": "You won! Your final score: {}",
         "lose": "You failed to guess the combination! Your final score: {}"
     }
-
-    EASY_MODE = 4
-    HARD_MODE = 5
 
     def __init__(self):
         self.combination = self.generate_combination(self.difficulty())
@@ -37,7 +35,6 @@ class Mastermind:
         else:
             print(f'Failed to get a combination from API. Status code: {response.status_code}. Generating random number instead.')
             return ''.join(str(random.randint(0, 7)) for _ in range(4))
-            
 
     # Write a method that checks if the guess is correct, partially correct, or incorrect:
     def check(self, guess: str):
@@ -88,6 +85,7 @@ class Mastermind:
     def all_incorrect(self, feedback):
         return feedback[0] == 0
     
+    # Write a method that allows a user to set the difficulty of the game:
     def difficulty(self):
         while True:
             desired_difficulty = input('\nDo you want to play on Easy or Hard mode? ')
@@ -100,6 +98,7 @@ class Mastermind:
         if desired_difficulty == "Hard":
             return self.HARD_MODE
 
+    # Write a method that gives a user a hint if they need it:
     def hint(self):
         while True:
             hint_needed = input("Do you need a hint? ")
@@ -142,7 +141,6 @@ class Mastermind:
             print(Fore.GREEN + f'{self.MESSAGES["win"].format(player_score)}\n' + Fore.RESET) 
         else:
             print(Fore.RED + f'{self.MESSAGES["lose"].format(player_score)}\n' + Fore.RESET ) 
-
 
 if __name__ == "__main__":
     game = Mastermind()
