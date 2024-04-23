@@ -1,5 +1,71 @@
 # Mastermind
 
+### RUN MASTERMIND LOCALLY ON YOUR DEVICE
+
+1. Install Python - If you have not done so already, ensure that you have Python3 installed on your device/machine. You can install it from [Python's Official Website](https://www.python.org/).
+
+2. Clone this repository - Open your terminal and run the following command to clone this Mastermind repository:
+
+```
+$ git clone https://github.com/gabeantonio/mastermind.git
+```
+
+3. Navigate to the project's directory - Move to the Mastermind project directory using the below command:
+
+```
+$ cd mastermind
+```
+
+4. Run the game - To play the game on your local terminal, execute the following command:
+
+```
+$ python3 mastermind.py
+```
+
+5. Follow the on-screen instructions - Once you execute the command stated above, please follow the on-screen instructions to play. Good luck, and happy guessing!
+
+### TROUBLESHOOTING
+
+1. If you happen to encounter any dependency issues, install the required Python packages:
+
+Requests:
+
+```
+$ python3 -m pip install requests
+```
+
+Colorama:
+
+```
+$ pip install colorama
+```
+
+All other modules used are built into Python3.
+
+### HOW TO PLAY
+
+1. Run the game using the command below:
+
+```
+$ python3 mastermind.py
+```
+2. Once you run the game, you'll have the option of increasing the game's difficulty before you start. If you want to play on hard difficulty, type "Yes" or "No" if you'd like to play the game on normal difficulty.
+
+3. After picking your difficulty level, the game will begin, and you will be prompted to type your first guess. Please type in a combination of 4 numbers if you decided to play on normal difficulty and a combination of 5 numbers if you decided on hard difficulty. 
+
+4. After each attempt at guessing the hidden combination, the computer will give you feedback. It will tell you how many correct numbers and positions you guessed, if any. Additionally, the computer will keep track of your score - it is based on how fast you guess the combination. You'll be given your score at the end of the game, if you guess the correct combination before your 10 attempts are up. If you don't figure out the combination, your score is 0 and you lose. 
+
+5. If you don't guess any correct numbers in a given attempt, the computer will ask you if you'd like a hint. Please type 'yes' if you'd like one or 'no' if you don't.
+
+6. You will have 10 attempts to figure out the hidden combination, so please use the feedback and hints from the computer to figure out the hidden combination. 
+
+7. If you figure out the hidden combination before you run out of attempts, you win and the game will end. 
+
+8. Similarly, if you fail to figure out the hidden combination and run out of attempts, you lose and the game will end.
+
+9. Good luck!
+
+
 PROCESS
 
 1. I plan on creating two scripts for this project: One script that will handle the interface on the command line, and one script that will handle the game logic.
