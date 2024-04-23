@@ -9,7 +9,9 @@ class Mastermind:
     TOTAL_TRIES = 10
     EASY_MODE = 4
     HARD_MODE = 5
+    MAX_TIME = 900
     MESSAGES = {
+        "instructions": "Welcome to Mastermind! Try to guess the secret code consisting of {} numbers between 0 and 7. You have 10 attempts to guess correctly. Good luck! ",
         "numbers_only": "Please only enter numbers.",
         "wrong_length": "Input is either too short or too long. Please make sure your input is {} digits long.",
         "difficulty": "Please input either Easy or Hard.",
@@ -28,12 +30,13 @@ class Mastermind:
     # Write a method that fetches the random number combination from the API:
     def generate_combination(self, difficulty_level):
         api_url = f"https://www.random.org/integers/?num={difficulty_level}&min=0&max=7&col=1&base=10&format=plain&rnd=new"
-        response = requests.get(api_url)
-        if response.status_code == 200:
+        try:
+            response = requests.get(api_url)
+            response.raise_for_status()
             combination = f'{response.text}'.replace('\n', '')
             return combination
-        else:
-            print(f'Failed to get a combination from API. Status code: {response.status_code}. Generating random number instead.')
+        except requests.RequestException as error:
+            print(f'Failed to get a combination from API: {error}. Generating random number instead.')
             return ''.join(str(random.randint(0, 7)) for _ in range(4))
 
     # Write a method that checks if the guess is correct, partially correct, or incorrect:
@@ -109,11 +112,13 @@ class Mastermind:
         if hint_needed == "no":
             return Fore.CYAN + f'\n{self.MESSAGES["no_hint"]}\n' + Fore.RESET
 
+    # Write a method that displays the game's instructions to the user at the start of the game:
+    def display_instructions(self):
+        return Fore.GREEN + f'\n{self.MESSAGES["instructions"].format(len(self.combination))}\n' + Fore.RESET
+    
     # Write a method that allows the user to play the game:
     def play(self):
-        print("\nWelcome to Mastermind!")
-        print(f"Try to guess the secret code consisting of {len(self.combination)} numbers between 0 and 7.")
-        print("You have 10 attempts to guess correctly. Good luck!\n")
+        print(self.display_instructions())
         print(self.combination, '<------ COMBINATION')
         player_score = 0
         start = time.time()
@@ -132,7 +137,7 @@ class Mastermind:
         if self.correct_guess:
             end = time.time()
             duration = end - start
-            player_score += math.floor((900 - duration) * 5)
+            player_score += math.floor((self.MAX_TIME - duration) * 5)
             if player_score < 0:
                 player_score = 0
             print(Fore.GREEN + f'{self.MESSAGES["win"].format(player_score)}\n' + Fore.RESET) 
