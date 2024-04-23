@@ -13,7 +13,7 @@ $ git clone https://github.com/gabeantonio/project_mastermind.git
 3. Navigate to the project's directory - Move to the Mastermind project directory using the below command:
 
 ```
-$ cd mastermind
+$ cd project_mastermind
 ```
 
 4. Run the game - To play the game on your local terminal, execute the following command:
