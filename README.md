@@ -49,7 +49,7 @@ All other modules used are built into Python3.
 ```
 $ python3 mastermind.py
 ```
-2. Once you run the game, you'll have the option of increasing the game's difficulty before you start. If you want to play on hard difficulty, type "Easy" or "Hard" depending on the difficulty you want to play the game on.
+2. Once you run the game, you'll have the option of increasing the game's difficulty before you start. Type "Easy" or "Hard" depending on the difficulty you want to play the game on.
 
 3. After picking your difficulty level, the game will begin, and you will be prompted to type your first guess. Please type in a combination of 4 numbers if you decided to play on normal difficulty and a combination of 5 numbers if you decided on hard difficulty. 
 
