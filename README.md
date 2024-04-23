@@ -27,3 +27,4 @@ TECHNOLOGIES USED:
 3. Colorama (for game interface)
 4. Python Time Module (for timer scoring functionality)
 5. Python Math Module (for timer scoring functionality)
+6. Python Random Module (for hint and api error handling functionality)
