@@ -51,10 +51,7 @@ class Mastermind:
     # Write a method that checks if the user has won or not:
     @property
     def correct_guess(self):
-        if len(self.guesses) > 0 and self.guesses[-1] == self.combination:
-            return True
-        else:
-            return False
+        return len(self.guesses) > 0 and self.guesses[-1] == self.combination
         
     # Write a method that checks if a user can still make guesses:
     def continue_game(self):
