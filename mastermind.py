@@ -36,7 +36,7 @@ class Mastermind:
             return combination
         except requests.RequestException as error:
             print(f'Failed to get a combination from API: {error}. Generating random number instead.')
-            return ''.join(str(random.randint(0, 7)) for _ in range(4))
+            return ''.join(str(random.randint(0, 7)) for _ in range(difficulty_level))
 
     def check(self, guess: str):
         in_combination, in_position = [], 0
@@ -52,7 +52,7 @@ class Mastermind:
     @property
     def correct_guess(self):
         return len(self.guesses) > 0 and self.guesses[-1] == self.combination
-        
+
     def continue_game(self):
         return self.TOTAL_TRIES - len(self.guesses) > 0 and not self.correct_guess
         
