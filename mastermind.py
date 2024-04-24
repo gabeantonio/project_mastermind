@@ -1,8 +1,8 @@
 import requests
-from colorama import Fore
 import time
 import math
 import random
+from colorama import Fore
 
 class Mastermind:
 
