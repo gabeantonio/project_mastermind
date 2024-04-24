@@ -27,7 +27,6 @@ class Mastermind:
         self.combination = self.generate_combination(self.difficulty())
         self.guesses = []
 
-    # Write a method that fetches the random number combination from the API:
     def generate_combination(self, difficulty_level):
         api_url = f"https://www.random.org/integers/?num={difficulty_level}&min=0&max=7&col=1&base=10&format=plain&rnd=new"
         try:
@@ -39,7 +38,6 @@ class Mastermind:
             print(f'Failed to get a combination from API: {error}. Generating random number instead.')
             return ''.join(str(random.randint(0, 7)) for _ in range(4))
 
-    # Write a method that checks if the guess is correct, partially correct, or incorrect:
     def check(self, guess: str):
         in_combination, in_position = [], 0
         for i in range(len(self.combination)):
@@ -51,20 +49,16 @@ class Mastermind:
         correct_numbers = len(set(in_combination))
         return [correct_numbers, in_position]
 
-    # Write a method that checks if the user has won or not:
     @property
     def correct_guess(self):
         return len(self.guesses) > 0 and self.guesses[-1] == self.combination
         
-    # Write a method that checks if a user can still make guesses:
     def continue_game(self):
         return self.TOTAL_TRIES - len(self.guesses) > 0 and not self.correct_guess
         
-    # Write a method that adds a user's guesses to the self.guesses array:
     def add_guess(self, guess: str):
         self.guesses.append(guess)
     
-    # Write a method that takes the user's guess anc validates it:
     def get_user_guess(self):
         while True:
             user_guess = input('\nType your guess here: ')
@@ -75,17 +69,14 @@ class Mastermind:
             else:
                 return user_guess
 
-    # Write a method that displays to the user some feedback regarding their most recent guess:
     def display_feedback(self, feedback):
         return Fore.GREEN + f'You guessed {feedback[0]} correct numbers in {feedback[1]} correct positions. ' \
                             f'You have {self.TOTAL_TRIES - len(self.guesses)} attempts remaining. ' \
                             f'Your previous guesses: \n {self.guesses}\n' + Fore.RESET  
     
-    # Write a method that checks if a user's guess is entirely incorrect:
     def all_incorrect(self, feedback):
         return feedback[0] == 0
     
-    # Write a method that allows a user to set the difficulty of the game:
     def difficulty(self):
         while True:
             desired_difficulty = input('\nDo you want to play on Easy or Hard mode? ')
@@ -98,7 +89,6 @@ class Mastermind:
         if desired_difficulty == "Hard":
             return self.HARD_MODE
 
-    # Write a method that gives a user a hint if they need it:
     def hint(self):
         while True:
             hint_needed = input("Do you need a hint? ")
@@ -112,18 +102,15 @@ class Mastermind:
         if hint_needed == "no":
             return Fore.CYAN + f'\n{self.MESSAGES["no_hint"]}\n' + Fore.RESET
 
-    # Write a method that displays the game's instructions to the user at the start of the game:
     def display_instructions(self):
         return Fore.GREEN + f'\n{self.MESSAGES["instructions"].format(len(self.combination))}\n' + Fore.RESET
     
-    # Write a method that allows the user to play the game:
     def play(self):
         print(self.display_instructions())
         print(self.combination, '<------ COMBINATION')
         player_score = 0
         start = time.time()
         while self.continue_game():
-
             user_guess = self.get_user_guess()
             self.add_guess(user_guess)
             feedback = self.check(user_guess)
@@ -132,8 +119,6 @@ class Mastermind:
                 print(self.hint())
             else:
                 print(self.display_feedback(feedback))
-
-    # Add logic that will check to see if the most recent guess is correct or not:
         if self.correct_guess:
             end = time.time()
             duration = end - start
