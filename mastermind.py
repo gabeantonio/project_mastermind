@@ -38,26 +38,12 @@ class Mastermind:
             print(f'Failed to get a combination from API: {error}. Generating random number instead.')
             return ''.join(str(random.randint(0, 7)) for _ in range(difficulty_level))
 
-    def check(self, guess: str):
-        in_combination, in_position = [], 0
-        for i in range(len(self.combination)):
-            number = guess[i]
-            if number in self.combination:
-                in_combination.append(number)
-            if number == self.combination[i]:
-                in_position += 1
-        correct_numbers = len(set(in_combination))
-        return [correct_numbers, in_position]
-
     @property
     def correct_guess(self):
         return len(self.guesses) > 0 and self.guesses[-1] == self.combination
-
+    
     def continue_game(self):
         return self.TOTAL_TRIES - len(self.guesses) > 0 and not self.correct_guess
-        
-    def add_guess(self, guess: str):
-        self.guesses.append(guess)
     
     def get_user_guess(self):
         while True:
@@ -68,14 +54,28 @@ class Mastermind:
                 print(Fore.RED + f'\n{self.MESSAGES["wrong_length"].format(len(self.combination))}\n' + Fore.RESET)
             else:
                 return user_guess
+    
+    def add_guess(self, guess: str):
+        self.guesses.append(guess)
+    
+    def check(self, guess: str):
+        in_combination, in_position = [], 0
+        for i in range(len(self.combination)):
+            number = guess[i]
+            if number in self.combination:
+                in_combination.append(number)
+            if number == self.combination[i]:
+                in_position += 1
+        correct_numbers = len(set(in_combination))
+        return [correct_numbers, in_position]
+    
+    def all_incorrect(self, feedback):
+        return feedback[0] == 0
 
     def display_feedback(self, feedback):
         return Fore.GREEN + f'You guessed {feedback[0]} correct numbers in {feedback[1]} correct positions. ' \
                             f'You have {self.TOTAL_TRIES - len(self.guesses)} attempts remaining. ' \
                             f'Your previous guesses: \n {self.guesses}\n' + Fore.RESET  
-    
-    def all_incorrect(self, feedback):
-        return feedback[0] == 0
     
     def difficulty(self):
         while True:
@@ -107,7 +107,6 @@ class Mastermind:
     
     def play(self):
         print(self.display_instructions())
-        print(self.combination, '<------ COMBINATION')
         player_score = 0
         start = time.time()
         while self.continue_game():
